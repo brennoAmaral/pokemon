@@ -14,9 +14,9 @@ const Button: FC<ButtonProps> = (props) => {
     const {
         children,
         width = '100%',
-        height = '40px',
+        height = '50px',
         border = false,
-        background = '#000000',
+        background = '#00000000',
         rounded = false,
         onClick
     } = props;
@@ -28,9 +28,11 @@ const Button: FC<ButtonProps> = (props) => {
         border={border}
         background={background}
         rounded={rounded}
-        onClick={onclick}
+        onClick={onClick}
     >
         {children}
     </S.Button>
   ) ;
 };
+
+export default Button;
