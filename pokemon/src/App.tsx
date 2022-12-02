@@ -4,6 +4,7 @@ import Lupe from './assets/svg/lupe';
 import Star from './assets/svg/star';
 import Button from './components/button';
 import Text from './components/text';
+import theme from './styles/theme';
 function App() {
 
   return (
@@ -19,7 +20,7 @@ function App() {
           <Button height='none' onClick={() => console.log('teste')}>
             <S.WrapperChildrenButton>
               <Filter />
-              <Text color='#fff' fontSize='15px'>
+              <Text color={theme.white} fontSize='15px'>
                 Filter
               </Text>
             </S.WrapperChildrenButton>
@@ -27,7 +28,7 @@ function App() {
           <Button height='none' onClick={() => console.log('teste')}>
             <S.WrapperChildrenButton>
               <Star />
-              <Text color='#fff' fontSize='15px'>
+              <Text color={theme.white} fontSize='15px'>
                 Favorites
               </Text>
             </S.WrapperChildrenButton>
@@ -35,7 +36,7 @@ function App() {
           <Button height='none' onClick={() => console.log('teste')}>
             <S.WrapperChildrenButton>
               <Lupe />
-              <Text color='#fff' fontSize='15px'>
+              <Text color={theme.white} fontSize='15px'>
                 Search
               </Text>
             </S.WrapperChildrenButton>

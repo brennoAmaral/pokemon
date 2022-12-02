@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Logo from './assets/png/pokemonLogo.png'
 import Ball from './assets/png/Pokeball.png'
+
 export const Header = styled.header`
     width: 100%;
-    background-color: #071330;
+    background-color: ${({theme}) => theme.darkBlue};
     padding-bottom: 20px;
     display: flex;
     align-items: center;
@@ -37,7 +38,7 @@ export const Pokeball = styled.img`
 export const NavBar = styled.nav`
     width: 100%;
     padding: 10px 0px; 
-    background-color: #071330;
+    background-color: ${({theme}) => theme.darkBlue};
     position: fixed;
     bottom: 0;
     display: flex;
