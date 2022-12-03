@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-interface ButtonProps{
-    width: string
-    height: string
-    border: boolean
-    background: string
-    rounded: boolean
-    margin: string
+interface ButtonProps {
+  width: string
+  height: string
+  border: boolean
+  background: string
+  rounded: boolean
+  margin: string
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -17,5 +17,5 @@ export const Button = styled.button<ButtonProps>`
   background-color: ${({ background }) => background};
   height: ${({ height }) => height};
   width: ${({ width }) => width};
-  margin: ${({margin})=> margin}
-`;
+  margin: ${({ margin }) => margin}
+`

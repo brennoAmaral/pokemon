@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-interface ModalProps{
+interface ModalProps {
   isOpen: boolean
 }
 
@@ -12,4 +12,4 @@ export const Modal = styled.div`
   bottom: ${({ isOpen }) => isOpen ? '0' : '-999999px'};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-`;
+`

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC } from 'react'
 
 const Filter: FC = (props: React.SVGProps<SVGSVGElement>) => {
   return (
@@ -12,7 +12,7 @@ const Filter: FC = (props: React.SVGProps<SVGSVGElement>) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Filter;
+export default Filter

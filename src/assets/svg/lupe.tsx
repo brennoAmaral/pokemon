@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC } from 'react'
 
 const Lupe: FC = (props: React.SVGProps<SVGSVGElement>) => {
   return (
@@ -12,7 +12,7 @@ const Lupe: FC = (props: React.SVGProps<SVGSVGElement>) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Lupe;
+export default Lupe
