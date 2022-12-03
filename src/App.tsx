@@ -1,7 +1,5 @@
 import Card from './components/card'
-import getPokemon, { Pokemon } from './services/pokeSearch'
-import { FC, useCallback, useContext } from 'react'
-import { PokemonSetupContext } from './context/PokemonSetupProvider'
+import { useCallback } from 'react'
 import Header from './components/header'
 import NavBar from './components/navBar'
 import * as S from './style'
@@ -11,23 +9,25 @@ const pokemonMock = [
     id: 132,
     name: 'ditto',
     type: 'normal',
-    sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
+    sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
+    fav: true
   },
   {
     id: 25,
     name: 'pikachu',
     type: 'eletric',
-    sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
+    sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
+    fav: false
   }
 ]
 
-function App () {
+function App (): JSX.Element {
   // const { pokeArray } = useContext(PokemonSetupContext)
 
-  const renderPoke = useCallback((pokemons: Pokemon[]) => {
-    return pokemons.map((pokemon) => {
+  const renderPoke = useCallback((pokemons: any) => {
+    return pokemons.map((pokemon: any) => {
       return (
-        <Card pokeProps={pokemon} />
+        <Card key={pokemon.sprite} name={pokemon.name} id={pokemon.id} sprite={pokemon.sprite} type={pokemon.type} fav={pokemon.fav}/>
       )
     })
   }, [])

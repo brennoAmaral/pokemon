@@ -1,28 +1,24 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC } from 'react'
 import Star from '../../assets/svg/star'
-import { favorite } from '../../services/favorite'
-import { Pokemon } from '../../services/pokeSearch'
 import theme from '../../styles/theme'
 import Button from '../button'
 import Text from '../text'
 import * as S from './styled'
 
 interface CardProps {
-  pokeProps: Pokemon
-  pokeName: string
-  pokeId: number
-  pokeType: string
-  pokeSprite: string
+  name: string
+  id: number
+  type: string
+  sprite: string
   fav: boolean
 }
 
 const Card: FC<CardProps> = (props) => {
   const {
-    pokeName,
-    pokeId,
-    pokeType,
-    pokeSprite,
+    name,
+    id,
+    type,
+    sprite,
     fav
   } = props
 
@@ -38,22 +34,22 @@ const Card: FC<CardProps> = (props) => {
       <S.Card>
         <S.HeaderCard>
           <Text fontSize='18px' bold margin='2px 0 0 0'>
-            {pokeName}
+            {name}
           </Text>
           <S.WrapperStar>
-            <Button onClick={() => console.log(`${pokeName} favoritado com sucesso`)} height='auto'>
+            <Button onClick={() => console.log(`${name} favoritado com sucesso`)} height='auto'>
               <Star fill={fav ? theme.yellow : theme.white} />
             </Button>
           </S.WrapperStar>
         </S.HeaderCard>
-        <img src={pokeSprite} height={'100px'} width={'100px'} />
+        <img src={sprite} height={'100px'} width={'100px'} />
         <S.WrapperInfo>
           <S.WrapperText>
             <Text fontSize='15px' color={theme.white}>
-              {`id: ${pokeId}`}
+              {`id: ${id}`}
             </Text>
             <Text fontSize='15px' color={theme.white}>
-              {`Type: ${pokeType}`}
+              {`Type: ${type}`}
             </Text>
           </S.WrapperText>
         </S.WrapperInfo>
