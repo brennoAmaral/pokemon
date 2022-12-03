@@ -13,15 +13,16 @@ interface CardProps {
   pokeName: string
   pokeId: number
   pokeType: string
+  pokeSprite: string
   fav: boolean
 }
 
 const Card: FC<CardProps> = (props) => {
   const {
-    pokeProps,
     pokeName,
     pokeId,
     pokeType,
+    pokeSprite,
     fav
   } = props
 
@@ -40,12 +41,12 @@ const Card: FC<CardProps> = (props) => {
             {pokeName}
           </Text>
           <S.WrapperStar>
-            <Button onClick={() => favorite(pokemon)} height='auto'>
+            <Button onClick={() => console.log(`${pokeName} favoritado com sucesso`)} height='auto'>
               <Star fill={fav ? theme.yellow : theme.white} />
             </Button>
           </S.WrapperStar>
         </S.HeaderCard>
-        <img src={pokemon.sprite} height={'100px'} width={'100px'} />
+        <img src={pokeSprite} height={'100px'} width={'100px'} />
         <S.WrapperInfo>
           <S.WrapperText>
             <Text fontSize='15px' color={theme.white}>
