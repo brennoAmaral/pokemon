@@ -10,12 +10,18 @@ import * as S from './styled'
 
 interface CardProps {
   pokeProps: Pokemon
+  pokeName: string
+  pokeId: number
+  pokeType: string
   fav: boolean
 }
 
 const Card: FC<CardProps> = (props) => {
   const {
     pokeProps,
+    pokeName,
+    pokeId,
+    pokeType,
     fav
   } = props
   const [pokemon, setPokemon] = useState<Pokemon>({
@@ -42,7 +48,7 @@ const Card: FC<CardProps> = (props) => {
       <S.Card>
         <S.HeaderCard>
           <Text fontSize='18px' bold margin='2px 0 0 0'>
-            {pokemon.name}
+            {pokeName}
           </Text>
           <S.WrapperStar>
             <Button onClick={() => favorite(pokemon)} height='auto'>
@@ -54,10 +60,10 @@ const Card: FC<CardProps> = (props) => {
         <S.WrapperInfo>
           <S.WrapperText>
             <Text fontSize='15px' color={theme.white}>
-              {`id: ${pokemon.id}`}
+              {`id: ${pokeId}`}
             </Text>
             <Text fontSize='15px' color={theme.white}>
-              {`Type: ${pokemon.type}`}
+              {`Type: ${pokeType}`}
             </Text>
           </S.WrapperText>
         </S.WrapperInfo>
