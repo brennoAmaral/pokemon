@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import Star from '../../assets/svg/blueStar';
+import Star from '../../assets/svg/star';
 import { favorite } from '../../services/favorite';
 import getPokemon, { Pokemon } from '../../services/pokeSearch';
 import theme from '../../styles/theme';
@@ -8,12 +8,14 @@ import Text from '../text';
 import * as S from './styled';
 
 interface CardProps {
-    pokeProps: Pokemon
+    pokeProps: Pokemon,
+    fav: boolean
 }
 
 const Card: FC<CardProps> = (props) => {
     let {
         pokeProps,
+        fav,
     } = props;
     const [pokemon, setPokemon] = useState<Pokemon>({
         id: undefined,
@@ -22,6 +24,7 @@ const Card: FC<CardProps> = (props) => {
         sprite: ''
     });
 
+    
     useEffect(() => {
         setPokemon(pokeProps);
         console.log('pokeProps' + pokeProps);
@@ -36,7 +39,7 @@ const Card: FC<CardProps> = (props) => {
                     </Text>
                     <S.WrapperStar>
                         <Button onClick={() => favorite(pokemon)} height='auto'>
-                            <Star />
+                            <Star fill={fav ? theme.yellow : theme.white} />
                         </Button>
                     </S.WrapperStar>
                 </S.HeaderCard>
