@@ -5,13 +5,11 @@ import Star from './assets/svg/star';
 import Button from './components/button';
 import Text from './components/text';
 import theme from './styles/theme';
-import { useEffect } from 'react';
+import Card from './components/card';
 import getPokemon from './services/pokeSearch';
+import { useEffect } from 'react';
 
 function App() {
-  useEffect(()=>{
-    getPokemon('ditto');  
-  },[])
   return (
     <div className="App">
       <S.Header>
@@ -20,7 +18,7 @@ function App() {
           <S.Pokeball />
         </S.WrapperPokeBall>
       </S.Header>
-
+      <Card pokeProps={getPokemon('ditto')} />
       <S.NavBar>
         <S.WrapperButton>
           <Button height='none' onClick={() => console.log('teste')}>

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import theme from '../../styles/theme';
 import * as S from './styled';
 
 interface TextProps{
@@ -14,7 +15,7 @@ const Text: FC<TextProps> = (props) => {
         children,
         fontSize = '20px',
         bold = false,
-        color = '#000000',
+        color = `${theme.darkBlue}`,
         margin = '0'
     } = props;
 
