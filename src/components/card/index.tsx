@@ -23,14 +23,15 @@ const Card: FC<CardProps> = (props) => {
     });
 
     useEffect(() => {
-        setPokemon(pokeProps)
+        setPokemon(pokeProps);
         console.log('pokeProps' + pokeProps);
-    }, [])
+    }, [pokeProps]);
+
     return (
-        <Button onClick={() => console.log('chamar modal detalhada')} height='auto' width='auto'>
+        <Button onClick={() => console.log('chamar modal detalhada')} height='auto' width='auto' margin='0 0 8px 0'>
             <S.Card>
                 <S.HeaderCard>
-                    <Text fontSize='22px' bold>
+                    <Text fontSize='18px' bold margin='2px 0 0 0'>
                         {pokemon.name}
                     </Text>
                     <S.WrapperStar>
@@ -41,12 +42,14 @@ const Card: FC<CardProps> = (props) => {
                 </S.HeaderCard>
                 <img src={pokemon.sprite} height={'100px'} width={'100px'} />
                 <S.WrapperInfo>
+                    <S.WrapperText>
                     <Text fontSize='15px' color={theme.white}>
                         {`id: ${pokemon.id}`}
                     </Text>
                     <Text fontSize='15px' color={theme.white}>
                         {`Type: ${pokemon.type}`}
                     </Text>
+                    </S.WrapperText>
                 </S.WrapperInfo>
             </S.Card>
         </Button>

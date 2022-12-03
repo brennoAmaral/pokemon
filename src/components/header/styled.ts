@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Logo from './assets/png/pokemonLogo.png'
-import Ball from './assets/png/Pokeball.png'
+import Ball from '../../assets/png/pokeball.png';
+import Logo from '../../assets/png/pokemonLogo.png';
 
 export const Header = styled.header`
     width: 100%;
@@ -35,37 +35,11 @@ export const Pokeball = styled.img`
     width: 40px;
 `;
 
-export const NavBar = styled.nav`
-    width: 100%;
-    padding: 10px 0px; 
-    background-color: ${({theme}) => theme.darkBlue};
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
-
-`;
-
-export const WrapperButton = styled.div`
-    width: 100%;
-    padding: 0px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-export const WrapperChildrenButton = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
 PokemonLogo.defaultProps = {
     src: Logo
   };
-
-Pokeball.defaultProps = {
+  
+  Pokeball.defaultProps = {
     src: Ball
-};
+  };
+  

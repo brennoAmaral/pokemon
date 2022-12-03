@@ -1,25 +1,16 @@
+import { FC } from 'react';
 import * as S from './styled';
-import Filter from './assets/svg/filter';
-import Lupe from './assets/svg/lupe';
-import Star from './assets/svg/star';
-import Button from './components/button';
-import Text from './components/text';
-import theme from './styles/theme';
-import Card from './components/card';
-import getPokemon from './services/pokeSearch';
-import { useEffect } from 'react';
+import Filter from '../../assets/svg/filter';
+import Lupe from '../../assets/svg/lupe';
+import Star from '../../assets/svg/star';
+import theme from '../../styles/theme';
+import Text from '../text';
+import Button from '../button';
 
-function App() {
-  return (
-    <div className="App">
-      <S.Header>
-        <S.PokemonLogo />
-        <S.WrapperPokeBall>
-          <S.Pokeball />
-        </S.WrapperPokeBall>
-      </S.Header>
-      <Card pokeProps={getPokemon('ditto')} />
-      <S.NavBar>
+const NavBar: FC = () => {
+    
+  return(
+    <S.NavBar>
         <S.WrapperButton>
           <Button height='none' onClick={() => console.log('teste')}>
             <S.WrapperChildrenButton>
@@ -47,8 +38,7 @@ function App() {
           </Button>
         </S.WrapperButton>
       </S.NavBar>
-    </div>
-  )
+  ) ;
 };
 
-export default App;
+export default NavBar;

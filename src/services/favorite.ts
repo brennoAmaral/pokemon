@@ -5,14 +5,19 @@ export const favorite = (pokemon: Pokemon) => {
     let pokeStorage = localStorage.getItem('favorites');
     console.log(pokeStorage);
     if (pokeStorage != null){
-        console.log('entrou aqui', pokeStorage);
         //pokeArr = Object.keys(pokeStorage).map(i=> JSON.parse(pokeStorage[Number(i)]));
         pokeArr = JSON.parse(pokeStorage);
-        console.log('teste',pokeArr)
-        pokeArr.push(pokemon);
-        console.log('entrou aqui',pokemon, pokeArr);
-        localStorage.setItem('favorites', JSON.stringify(pokeArr));
-        console.log('favorites: '+pokeStorage);
+        pokeArr.forEach((index, keys) => {
+            console.log(index.name)
+            if(index.name === pokemon.name) {
+                console.log('esntrou aqui')
+                return;
+            }else{
+            pokeArr.push(pokemon);
+            localStorage.setItem('favorites', JSON.stringify(pokeArr));
+            };
+        });
+        
     }else{
         pokeArr = [pokemon];
         localStorage.setItem('favorites', JSON.stringify(pokeArr));
