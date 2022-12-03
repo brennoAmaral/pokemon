@@ -24,17 +24,6 @@ const Card: FC<CardProps> = (props) => {
     pokeType,
     fav
   } = props
-  const [pokemon, setPokemon] = useState<Pokemon>({
-    id: undefined,
-    name: '',
-    type: '',
-    sprite: ''
-  })
-
-  useEffect(() => {
-    setPokemon(pokeProps)
-    console.log('pokeProps' + pokeProps)
-  }, [pokeProps])
 
   return (
     <Button
