@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useRef, useState } from 'react'
 import Lupe from '../../assets/svg/lupe'
 import theme from '../../styles/theme'
 import * as S from './styled'
