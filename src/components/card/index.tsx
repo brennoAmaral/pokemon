@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import Star from '../../assets/svg/star'
 import theme from '../../styles/theme'
 import Button from '../button'
@@ -11,6 +11,7 @@ interface CardProps {
   type: string
   sprite: string
   fav: boolean
+  onClick: () => void
 }
 
 const Card: FC<CardProps> = (props) => {
@@ -19,14 +20,15 @@ const Card: FC<CardProps> = (props) => {
     id,
     type,
     sprite,
-    fav
+    fav,
+    onClick
   } = props
-
+  useEffect(() => {
+    console.log(onClick)
+  }, [])
   return (
     <Button
-      onClick={
-        () => console.log('chamar modal detalhada')
-      }
+      onClick={onClick}
       height='auto'
       width='auto'
       margin='0 0 8px 0'
@@ -55,7 +57,6 @@ const Card: FC<CardProps> = (props) => {
         </S.WrapperInfo>
       </S.Card>
     </Button>
-
   )
 }
 
