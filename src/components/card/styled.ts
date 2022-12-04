@@ -1,9 +1,4 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
-
-interface imgProps {
-  sprite: string
-}
 
 export const Card = styled.div`
     width: 160px;

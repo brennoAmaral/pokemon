@@ -3,13 +3,42 @@ import styled from 'styled-components'
 interface ModalProps {
   isOpen: boolean
 }
-
-export const Modal = styled.div`
+export const Shadow = styled.div<ModalProps>`
   width: 100%;
-  height: 590px;
+  height: 100vh;
+  background-color: #000000eb;
+  position: fixed;
+  z-index: 9;
+`
+export const Modal = styled.div<ModalProps>`
+  width: 100%;
+  height: 620px;
   position: absolute;
   transition: 1s;
   bottom: ${({ isOpen }) => isOpen ? '0' : '-999999px'};
+  display: ${({ isOpen }) => isOpen ? 'normal' : 'none'};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${({ theme }) => theme.white};
+`
+
+export const WrapperStar = styled.div`
+    position: absolute;
+    top: 0px;
+    right: 3px;
+`
+
+export const HeaderModal = styled.div`
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+`
+export const WrapperText = styled.div`
+    text-align: initial;
+    width: 70%;
 `
