@@ -5,6 +5,7 @@ import NavBar from './components/navBar'
 import * as S from './style'
 import Modal from './components/modal'
 import { PokemonSetupContext } from './context/PokemonSetupProvider'
+import SearchBar from './components/searchBar'
 
 // const pokemonMock = [
 //   {
@@ -72,6 +73,7 @@ function App (): JSX.Element {
         <S.WrapperList>
           {renderPoke(pokemons)}
           {renderModal(pokemons)}
+          <SearchBar />
         </S.WrapperList>
         <NavBar />
       </>
