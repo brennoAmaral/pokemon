@@ -7,42 +7,72 @@ import * as S from './styled'
 
 interface ModalProps {
   isOpen: boolean
+  fav: boolean
   name: string
+  sprite: string
   id: number
   type: string
-  sprite: string
-  fav: boolean
+  hp: number
+  attack: number
+  especialAttack: number
+  defense: number
+  especialDefense: number
+  weight: number
 }
 
 const Modal: FC<ModalProps> = (props) => {
   const {
     isOpen,
+    fav,
     name,
+    sprite,
     id,
     type,
-    sprite,
-    fav
+    hp,
+    attack,
+    especialAttack,
+    defense,
+    especialDefense,
+    weight
   } = props
   return (
-    <S.Shadow>
+    <S.Shadow isOpen={isOpen}>
       <S.Modal isOpen={isOpen}>
         <S.HeaderModal>
-          <Text fontSize='18px' bold margin='2px 0 0 0'>
+          <Text fontSize='35px' bold margin='2px 0 0 0'>
             {name}
           </Text>
           <S.WrapperStar>
             <Button onClick={() => console.log(`${name} favoritado com sucesso`)} height='auto'>
-              <Star fill={fav ? theme.yellow : theme.white} />
+              <Star fill={fav ? theme.yellow : theme.white} size={35} />
             </Button>
           </S.WrapperStar>
         </S.HeaderModal>
-        <img src={sprite} height={'100px'} width={'100px'} />
+        <img src={sprite} height={'200px'} width={'200px'} />
         <S.WrapperText>
-          <Text fontSize='15px' color={theme.darkBlue}>
-            {`id: ${id}`}
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`ID: ${id}`}
           </Text>
-          <Text fontSize='15px' color={theme.darkBlue}>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
             {`Type: ${type}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`HP: ${hp}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`Attack: ${attack}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`Special Attack: ${especialAttack}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`Defense: ${defense}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`Special Defense: ${especialDefense}`}
+          </Text>
+          <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            {`Weight: ${weight}`}
           </Text>
         </S.WrapperText>
       </S.Modal>

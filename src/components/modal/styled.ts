@@ -9,14 +9,16 @@ export const Shadow = styled.div<ModalProps>`
   background-color: #000000eb;
   position: fixed;
   z-index: 9;
+  bottom: ${({ isOpen }) => isOpen ? '0' : '-740px'};
+  right: 0;
+  transition: 2s;
 `
 export const Modal = styled.div<ModalProps>`
   width: 100%;
   height: 620px;
   position: absolute;
   transition: 1s;
-  bottom: ${({ isOpen }) => isOpen ? '0' : '-999999px'};
-  display: ${({ isOpen }) => isOpen ? 'normal' : 'none'};
+  bottom: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
