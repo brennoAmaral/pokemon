@@ -64,7 +64,6 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
     })
   }
 
-
   return (
     <PokemonSetupContext.Provider value={{ pokemons, setPokemons, handleModal }}>
       {children}
