@@ -1,29 +1,29 @@
-import { FC } from 'react';
-import * as S from './styled';
+import { FC } from 'react'
+import * as S from './styled'
 
-interface ButtonProps{
-    children: string | JSX.Element
-    width?: string
-    height?: string
-    border?: boolean
-    background?: string
-    rounded?: boolean
-    margin?: string
-    onClick: () => void
+interface ButtonProps {
+  children: string | JSX.Element
+  width?: string
+  height?: string
+  border?: boolean
+  background?: string
+  rounded?: boolean
+  margin?: string
+  onClick: () => void
 }
 const Button: FC<ButtonProps> = (props) => {
-    const {
-        children,
-        width = '100%',
-        height = '50px',
-        border = false,
-        background = '#00000000',
-        rounded = false,
-        margin = 'none',
-        onClick
-    } = props;
-    
-  return(
+  const {
+    children,
+    width = '100%',
+    height = '50px',
+    border = false,
+    background = '#00000000',
+    rounded = false,
+    margin = 'none',
+    onClick
+  } = props
+
+  return (
     <S.Button
         width={width}
         height={height}
@@ -35,7 +35,7 @@ const Button: FC<ButtonProps> = (props) => {
     >
         {children}
     </S.Button>
-  ) ;
-};
+  )
+}
 
-export default Button;
+export default Button

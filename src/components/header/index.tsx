@@ -1,6 +1,5 @@
-import { FC } from 'react';
-import * as S from './styled';
-
+import { FC } from 'react'
+import * as S from './styled'
 
 const Header: FC = () => {
   return (
@@ -10,8 +9,7 @@ const Header: FC = () => {
         <S.Pokeball />
       </S.WrapperPokeBall>
     </S.Header>
-  );
-};
+  )
+}
 
-
-export default Header;
+export default Header
