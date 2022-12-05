@@ -29,11 +29,12 @@ import ElementType from './assets/svg/elementType'
 //   }
 // ]
 
-function App (): JSX.Element {
+function App(): JSX.Element {
   const { pokemons } = useContext(PokemonSetupContext)
   const [modal, setModal] = useState<boolean>(false)
   const [arrPosition, setArrPosition] = useState<number>(0)
   const [isFilter, setIsFilter] = useState<boolean>(false)
+  const [isSearch, setIsSearch] = useState<boolean>(false)
   const modalConstructure = useCallback((isFilter: boolean, name: string, fav: boolean, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, weight: number): JSX.Element => {
     if (isFilter) {
       return (
@@ -134,7 +135,19 @@ function App (): JSX.Element {
         onClose={() => setModal(false)}
         name={pokemons[arrPosition].name}
       >
-        {modalConstructure(isFilter, pokemons[arrPosition].name, true, pokemons[arrPosition].sprite, 10, pokemons[arrPosition].type, 10, 10, 10, 10, 10, 10)}
+        {modalConstructure(
+          isFilter,
+          pokemons[arrPosition].name,
+          true,
+          pokemons[arrPosition].sprite,
+          10,
+          pokemons[arrPosition].type,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10)}
       </Modal>
     )
   }, [modal, pokemons, arrPosition])
@@ -150,8 +163,8 @@ function App (): JSX.Element {
           {renderPoke(pokemons)}
           {renderModal()}
         </S.WrapperList>
-        <SearchBar />
-        <NavBar onFilter={() => handleFilter(true, true)} />
+        <SearchBar isOpen={isSearch} onCloseSearch={() => setIsSearch(false)} />
+        <NavBar onFilter={() => handleFilter(true, true)} onOpenSearch={() => setIsSearch(true)} />
       </>
     </div>
   )
