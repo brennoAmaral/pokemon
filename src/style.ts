@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const WrapperList = styled.div`
     width:96%;
     margin: 40px auto 0px auto;
-    padding-bottom: 40px;
+    padding-bottom: 80px;
     display: flex;
     flex-wrap: wrap;
 `
