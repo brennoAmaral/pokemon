@@ -47,10 +47,10 @@ const Card: FC<CardProps> = (props) => {
         <img src={sprite} height={'100px'} width={'100px'} />
         <S.WrapperInfo>
           <S.WrapperText>
-            <Text fontSize='15px' color={theme.white}>
+            <Text fontSize='16px' color={theme.white}>
               {`id: ${id}`}
             </Text>
-            <Text fontSize='15px' color={theme.white}>
+            <Text fontSize='16px' color={theme.white}>
               {`Type: ${type}`}
             </Text>
           </S.WrapperText>
