@@ -1,4 +1,4 @@
-import { Pokemon } from './pokeSearch'
+import { Pokemon } from './getPokemon'
 
 export const favorite = (pokemon: Pokemon) => {
   let pokeArr
