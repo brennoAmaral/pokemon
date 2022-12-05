@@ -30,5 +30,5 @@ export const Wrapper = styled.div<WrapperProps>`
   filter: drop-shadow(5px 5px 10px #000);
   transition: 1s;
   position: fixed;
-  bottom: ${({ isOpen }) => isOpen ? '200px' : '0px'}
+  bottom: ${({ isOpen }) => isOpen ? '100px' : '0px'}
 `

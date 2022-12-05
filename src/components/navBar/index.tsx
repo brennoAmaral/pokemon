@@ -9,14 +9,15 @@ import Button from '../button'
 
 interface NavBarProps {
   onFilter: () => void
+  onOpenSearch: () => void
 }
 
 const NavBar: FC<NavBarProps> = (props) => {
-  const { onFilter } = props
+  const { onFilter, onOpenSearch } = props
   return (
     <S.NavBar>
       <S.WrapperButton>
-        <Button height='none' onClick={() => console.log('teste')}>
+        <Button height='none' onClick={() => onFilter()}>
           <S.WrapperChildrenButton>
             <Filter />
             <Text color={theme.white} fontSize='15px'>
@@ -32,7 +33,7 @@ const NavBar: FC<NavBarProps> = (props) => {
             </Text>
           </S.WrapperChildrenButton>
         </Button>
-        <Button height='none' onClick={() => onFilter()}>
+        <Button height='none' onClick={() => onOpenSearch()}>
           <S.WrapperChildrenButton>
             <Lupe />
             <Text color={theme.white} fontSize='15px'>

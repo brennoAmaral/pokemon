@@ -3,24 +3,24 @@ import Lupe from '../../assets/svg/lupe'
 import theme from '../../styles/theme'
 import * as S from './styled'
 import Button from '../button'
-
-const SearchBar: FC = (props) => {
+interface SearchBarProps {
+  isOpen: boolean
+  onCloseSearch: () => void
+}
+const SearchBar: FC<SearchBarProps> = (props) => {
+  const { isOpen, onCloseSearch } = props
   const inputRef = useRef<string>('')
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [inputSearch, setInputSearch] = useState<string>('')
   const handleSearch = useCallback(() => {
     setInputSearch(inputRef.current.value)
+    console.log(inputRef.current.value)
+    onCloseSearch()
+    inputRef.current.value = ''
   }, [])
-  const handleSearchBar = useCallback((value: boolean): void => {
-    if (!value) {
-      setIsOpen(true)
-    } else {
-      setIsOpen(false)
-    }
-  }, [])
+
   return (
     <S.Wrapper isOpen={isOpen}>
-      <S.SearchBar placeholder='enter a pokemons name' ref={inputRef} />
+      <S.SearchBar placeholder='pokemon name...' ref={inputRef} />
       <Button onClick={() => handleSearch()} width='auto' height='auto'>
         <Lupe size='25px' fill={theme.darkBlue} stroke={theme.darkBlue} />
       </Button>
