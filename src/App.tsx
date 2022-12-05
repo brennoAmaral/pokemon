@@ -29,7 +29,7 @@ import ElementType from './assets/svg/elementType'
 //   }
 // ]
 
-function App(): JSX.Element {
+function App (): JSX.Element {
   const { pokemons } = useContext(PokemonSetupContext)
   const [modal, setModal] = useState<boolean>(false)
   const [arrPosition, setArrPosition] = useState<number>(0)
@@ -42,7 +42,7 @@ function App(): JSX.Element {
           <Button onClick={() => console.log('filter')} width='auto' height='auto'>
             <>
               <ElementType elementType='fire' background={theme.red} />
-              <Text>
+              <Text fontSize='25px'>
                 fire
               </Text>
             </>
@@ -50,7 +50,7 @@ function App(): JSX.Element {
           <Button onClick={() => console.log('filter')} width='auto' height='auto'>
             <>
               <ElementType background='#808080' />
-              <Text>
+              <Text fontSize='25px'>
                 flying
               </Text>
             </>
@@ -61,7 +61,7 @@ function App(): JSX.Element {
       return (
         <>
           <S.HeaderModal>
-            <Text fontSize='35px' bold margin='2px 0 0 0'>
+            <Text fontSize='40px' bold margin='2px 0 0 0'>
               {name}
             </Text>
             <S.WrapperStar>
@@ -72,28 +72,28 @@ function App(): JSX.Element {
           </S.HeaderModal>
           <img src={sprite} height={'200px'} width={'200px'} />
           <S.WrapperText>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`ID: ${id}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Type: ${type}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`HP: ${hp}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Attack: ${attack}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Special Attack: ${especialAttack}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Defense: ${defense}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Special Defense: ${especialDefense}`}
             </Text>
-            <Text fontSize='22px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Weight: ${weight}`}
             </Text>
           </S.WrapperText>
@@ -112,55 +112,55 @@ function App(): JSX.Element {
     setIsFilter(isFilter)
   }
 
-  const renderPoke = useCallback((pokemons: any) => {
-    return pokemons.map((pokemon: any, index) => {
+  const renderPoke = useCallback((pokemons: any, name: string) => {
+    return pokemons.map((pokemon: any, index: number) => {
       return (
         <Card
-          key={pokemon.sprite}
-          name={pokemon.name}
-          id={pokemon.id}
-          sprite={pokemon.sprite}
-          type={pokemon.type}
-          fav={pokemon.fav}
+          name={pokemon.data?.name}
+          id={pokemon.data?.id}
+          sprite={pokemon.data?.sprites.front_default}
+          type={pokemon.data?.types[0].type.name}
+          fav={pokemon.data?.fav}
           onClick={() => handlerModal(true, index)}
+          key={pokemon.data?.name}
         />
       )
     })
-  }, [])
+  }, [pokemons])
 
   const renderModal = useCallback(() => {
     return (
       <Modal
         isOpen={modal}
         onClose={() => setModal(false)}
-        name={pokemons[arrPosition].name}
+        name={pokemons[arrPosition].data?.name}
       >
         {modalConstructure(
           isFilter,
-          pokemons[arrPosition].name,
+          pokemons[arrPosition].data?.name,
           true,
-          pokemons[arrPosition].sprite,
-          10,
-          pokemons[arrPosition].type,
-          10,
-          10,
-          10,
-          10,
-          10,
-          10)}
+          pokemons[arrPosition].data?.sprites.front_default,
+          pokemons[arrPosition].data?.id,
+          pokemons[arrPosition].data?.types[0].type.name,
+          pokemons[arrPosition].data?.stats[0].base_stat,
+          pokemons[arrPosition].data?.stats[1].base_stat,
+          pokemons[arrPosition].data?.stats[3].base_stat,
+          pokemons[arrPosition].data?.stats[2].base_stat,
+          pokemons[arrPosition].data?.stats[4].base_stat,
+          pokemons[arrPosition].data?.weight)}
       </Modal>
     )
   }, [modal, pokemons, arrPosition])
 
   useEffect(() => {
-    console.log(arrPosition)
+    console.log(pokemons)
   })
   return (
     <div className="App">
       <>
         <Header />
         <S.WrapperList>
-          {renderPoke(pokemons)}
+          {renderPoke(pokemons, pokemons[arrPosition].name)}
           {renderModal()}
         </S.WrapperList>
         <SearchBar isOpen={isSearch} onCloseSearch={() => setIsSearch(false)} />
