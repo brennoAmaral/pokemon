@@ -1,17 +1,70 @@
-import { ReactNode, useState, createContext } from 'react'
+import { ReactNode, useState, createContext, useEffect, useRef } from 'react'
 import type { FC } from 'react'
+import getPokemons from '../services/getPokemons'
+
+interface Result<R> {
+  data: { results: R[] }
+}
 
 export interface Pokemon {
   id: number | undefined
   name: string
-  type: string
-  sprite: string
-  modalIsOpen: boolean
+  types: [{
+    type: {
+      slot: string
+      name: string
+    }
+  }]
+  sprites: {
+    front_default: string
+  }
+  stats: [{
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  },
+  {
+    base_stat: number
+    stat: {
+      name: string
+    }
+  }]
 }
 
 interface PokemonSetupDataStructure {
-  pokemons: Pokemon[]
-  setPokemons: (arr: Pokemon[]) => void
+  pokemons: Result<Pokemon>
+  setPokemons: (arr: Result<Pokemon>) => void
 }
 
 interface PokemonSetupProps {
@@ -40,12 +93,19 @@ export const PokemonSetupContext = createContext<PokemonSetupDataStructure>(init
 
 const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   const { children } = props
-  const [pokemons, setPokemons] = useState<Pokemon[]>(
+  const [pokemons, setPokemons] = useState<Result<Pokemon>>(
     initialPokemonSetup.pokemons
   )
-
+  useEffect(() => {
+    getPokemons().then((result) => {
+      setPokemons(result)
+      console.log('context ', result)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
   return (
-    <PokemonSetupContext.Provider value={{ pokemons, setPokemons}}>
+    <PokemonSetupContext.Provider value={{ pokemons, setPokemons }}>
       {children}
     </PokemonSetupContext.Provider>
   )
