@@ -26,11 +26,12 @@ const SearchBar: FC<SearchBarProps> = (props) => {
   }, [])
   const handleChange = (e: any): void => {
     console.log(e.target.value)
-    if (e.target.value.length < 3) {
+    if (e.target.value.length > 0) {
+      console.log(e.target.value)
       setInputValue(false)
     } else {
       setInputValue(true)
-    } 
+    }
   }
   return (
     <S.Wrapper isOpen={isOpen}>
