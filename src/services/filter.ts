@@ -60,16 +60,17 @@ interface Pokemon {
 }
 
 const getPokemonsByElement = async (pokemonType: number): Promise<Pokemon[]> => {
-  // @ts-ignore
+  // @ts-expect-error
   return await axios.get<any, Response<Pokemon>>(`https://pokeapi.co/api/v2/type/${pokemonType}`)
     .then(async (response) => {
-      const pokemons = response.data.pokemon
+      console.log('eleteeeeeeee', response)
+      const pokemons: Array<{ pokemon: { name: string, url: string } }> = response.data.pokemon
       return await Promise.all(pokemons.map(async (pokemon, key) => {
         return await axios.get(pokemons[key].pokemon.url)
       }))
     }).then((results) => {
       return results.map((result) => {
-        return result
+        return result.data
       }) as unknown as Pokemon[]
     }).catch((error) => {
       console.log(error)
