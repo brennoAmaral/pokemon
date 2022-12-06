@@ -3,10 +3,6 @@ import type { FC } from 'react'
 import getPokemons from '../services/getPokemons'
 import getPokemon from '../services/getPokemon'
 
-interface Result<R> {
-  data: { results: Array<Record<number, R>> }
-}
-
 export interface Pokemon {
   id: number
   name: string
@@ -104,6 +100,7 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   )
   const handleSearch = (name: string): void => {
     getPokemon(name).then((result) => {
+      // @ts-expect-error
       setPokemons(result)
     }).catch((error) => {
       console.log('error', error)
@@ -112,6 +109,7 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   const resetPokemons = (): void => {
     console.log('reset pokemoooooon')
     getPokemons().then((result) => {
+      // @ts-expect-error
       setPokemons(result)
       console.log('testeeeee', result)
     }).catch((error) => {

@@ -23,6 +23,7 @@ function App (): JSX.Element {
   const [modalFilter, setModalFilter] = useState<boolean>(false)
   const handleFilter = (typeNumber: number): void => {
     getPokemonsByElement(typeNumber).then((result) => {
+      // @ts-expect-error
       setPokemons(result)
     }).catch((error) => {
       console.log(error)
