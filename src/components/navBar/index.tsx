@@ -20,7 +20,7 @@ interface NavBarProps {
 }
 
 const NavBar: FC<NavBarProps> = (props) => {
-  const { openFilter, openSearch, openFavorites, showFavorites, isFilter, isSearch, setIsFavorite, setIsSearch} = props
+  const { openFilter, openSearch, openFavorites, showFavorites, isFilter, isSearch, setIsFavorite, setIsSearch } = props
   const { resetPokemons } = useContext(PokemonSetupContext)
 
   const buttonFilterRender = useCallback(() => {

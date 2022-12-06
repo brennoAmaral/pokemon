@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
-import axios, { Axios } from 'axios'
+import axios from 'axios'
 
 interface Response<R> {
   data: { results: R[] }
@@ -63,12 +63,12 @@ const getPokemon = async (name: string): Promise<Pokemon[]> => {
     .then(async (response) => {
       return [response]
     }).then((results) => {
-      return results as unknown as Pokemon[]
+      return results.map((result) => result.data) as unknown as Pokemon[]
     })
     .catch((error) => {
-      let errors = error.response.status
+      const errors = error.response.status
       if (errors === 404) {
-        alert('non-existent information')
+        return Promise.resolve([])
       }
     })
 }

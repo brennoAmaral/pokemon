@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import Star from '../../assets/svg/star'
+import { Pokemon } from '../../context/PokemonSetupProvider'
 import { setFavorite, setDisfavor } from '../../services/favorite'
 import theme from '../../styles/theme'
 import Button from '../button'
@@ -40,9 +41,9 @@ const Card: FC<CardProps> = (props) => {
   const [fav, setFav] = useState<boolean>(false)
 
   const isFavorite = (): void => {
-    let favorite = JSON.parse(localStorage.getItem('favorites'))
+    const favorite: Pokemon[] = JSON.parse(localStorage.getItem('favorites') as string)
     if (favorite !== null) {
-      let itsHere = favorite.find(x => x.data.id === id)
+      const itsHere = favorite.find(x => x.id === id)
       if (itsHere !== undefined) {
         setFav(true)
       }

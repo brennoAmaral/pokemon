@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "lint:fix": "eslint . --fix --config ./eslintrc.json --ext .js,.ts,.tsx"
+    "lint:fix": "eslint . --fix --config  ./.eslintrc.json --ext .js,.ts,.tsx"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",

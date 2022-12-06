@@ -4,11 +4,11 @@ import getPokemons from '../services/getPokemons'
 import getPokemon from '../services/getPokemon'
 
 interface Result<R> {
-  data: { results: R[] }
+  data: { results: Array<Record<number, R>> }
 }
 
 export interface Pokemon {
-  id: number | undefined
+  id: number
   name: string
   types: [{
     type: {
@@ -16,7 +16,7 @@ export interface Pokemon {
       name: string
     }
   }]
-  weigth: number
+  weight: number
   sprites: {
     front_default: string
   }
@@ -65,8 +65,8 @@ export interface Pokemon {
 }
 
 interface PokemonSetupDataStructure {
-  pokemons: Result<Pokemon>
-  setPokemons: (arr: Result<Pokemon>) => void
+  pokemons: Pokemon[]
+  setPokemons: (arr: Pokemon[]) => void
   resetPokemons: () => void
   handleSearch: (name: string) => void
 }
@@ -75,20 +75,20 @@ interface PokemonSetupProps {
   children: ReactNode
 }
 
-const initialPokemonSetup = {
+const initialPokemonSetup: PokemonSetupDataStructure = {
   pokemons: [
-    {
-      id: 132,
-      name: 'ditto',
-      type: 'normal',
-      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
-    },
-    {
-      id: 25,
-      name: 'pikachu',
-      type: 'eletric',
-      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
-    }
+    // {
+    //   id: 132,
+    //   name: 'ditto',
+    //   type: 'normal',
+    //   sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png'
+    // },
+    // {
+    //   id: 25,
+    //   name: 'pikachu',
+    //   type: 'eletric',
+    //   sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
+    // }
   ],
   setPokemons: () => undefined,
   resetPokemons: () => undefined,
@@ -99,19 +99,21 @@ export const PokemonSetupContext = createContext<PokemonSetupDataStructure>(init
 
 const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   const { children } = props
-  const [pokemons, setPokemons] = useState<Result<Pokemon>>(
+  const [pokemons, setPokemons] = useState<Pokemon[]>(
     initialPokemonSetup.pokemons
   )
-  const handleSearch = (name: string) => {
+  const handleSearch = (name: string): void => {
     getPokemon(name).then((result) => {
       setPokemons(result)
     }).catch((error) => {
-      console.log(error)
+      console.log('error', error)
     })
   }
   const resetPokemons = (): void => {
+    console.log('reset pokemoooooon')
     getPokemons().then((result) => {
       setPokemons(result)
+      console.log('testeeeee', result)
     }).catch((error) => {
       console.log(error)
     })
