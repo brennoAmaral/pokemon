@@ -10,7 +10,7 @@ export const NavBar = styled.nav`
     align-items: center;
     padding-top: 10px;
     border-top: 2px solid ${({ theme }) => theme.red};
-
+    z-index: 8;
 `
 
 export const WrapperButton = styled.div`

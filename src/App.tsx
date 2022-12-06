@@ -11,31 +11,16 @@ import Button from './components/button'
 import Star from './assets/svg/star'
 import theme from './styles/theme'
 import ElementType from './assets/svg/elementType'
-
-// const pokemonMock = [
-//   {
-//     id: 132,
-//     name: 'ditto',
-//     type: 'normal',
-//     sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
-//     fav: true
-//   },
-//   {
-//     id: 25,
-//     name: 'pikachu',
-//     type: 'eletric',
-//     sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-//     fav: false
-//   }
-// ]
+import getPokemons from './services/getPokemons'
 
 function App (): JSX.Element {
-  const { pokemons } = useContext(PokemonSetupContext)
+  const { pokemons, setPokemons } = useContext(PokemonSetupContext)
   const [modal, setModal] = useState<boolean>(false)
   const [arrPosition, setArrPosition] = useState<number>(0)
   const [isFilter, setIsFilter] = useState<boolean>(false)
   const [isSearch, setIsSearch] = useState<boolean>(false)
-  const modalConstructure = useCallback((isFilter: boolean, name: string, fav: boolean, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, weight: number): JSX.Element => {
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+  const modalConstructure = useCallback((isFilter: boolean, name: string, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, speed: number, weight: number): JSX.Element => {
     if (isFilter) {
       return (
         <S.WrapperElements>
@@ -66,7 +51,7 @@ function App (): JSX.Element {
             </Text>
             <S.WrapperStar>
               <Button onClick={() => console.log(`${name} favoritado com sucesso`)} height='auto'>
-                <Star fill={fav ? theme.yellow : theme.white} size={35} />
+                <Star fill={theme.yellow} size={35} />
               </Button>
             </S.WrapperStar>
           </S.HeaderModal>
@@ -94,6 +79,9 @@ function App (): JSX.Element {
               {`Special Defense: ${especialDefense}`}
             </Text>
             <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
+              {`speed: ${speed}`}
+            </Text>
+            <Text fontSize='23px' color={theme.darkBlue} margin={'0 0 10px 0'}>
               {`Weight: ${weight}`}
             </Text>
           </S.WrapperText>
@@ -111,8 +99,21 @@ function App (): JSX.Element {
     setModal(valueModal)
     setIsFilter(isFilter)
   }
+  const handleFavorites = (): void => {
+    if (isFavorite) {
+      setPokemons(JSON.parse(localStorage.getItem('favorites')))
+      setIsFavorite(false)
+    } else {
+      getPokemons().then((result) => {
+        setPokemons(result)
+      }).catch((error) => {
+        console.log(error)
+      })
+      setIsFavorite(true)
+    }
+  }
 
-  const renderPoke = useCallback((pokemons: any, name: string) => {
+  const renderPoke = useCallback((pokemons: any) => {
     return pokemons.map((pokemon: any, index: number) => {
       return (
         <Card
@@ -120,8 +121,14 @@ function App (): JSX.Element {
           id={pokemon.data?.id}
           sprite={pokemon.data?.sprites.front_default}
           type={pokemon.data?.types[0].type.name}
-          fav={pokemon.data?.fav}
           onClick={() => handlerModal(true, index)}
+          hp={pokemons[arrPosition].data?.stats[0].base_stat}
+          attack={pokemons[arrPosition].data?.stats[1].base_stat}
+          especialAttack={pokemons[arrPosition].data?.stats[3].base_stat}
+          defense={pokemons[arrPosition].data?.stats[2].base_stat}
+          especialDefense={pokemons[arrPosition].data?.stats[4].base_stat}
+          speed={pokemons[arrPosition].data?.stats[5].base_stat}
+          weight={pokemons[arrPosition].data?.weight}
           key={pokemon.data?.name}
         />
       )
@@ -138,7 +145,6 @@ function App (): JSX.Element {
         {modalConstructure(
           isFilter,
           pokemons[arrPosition].data?.name,
-          true,
           pokemons[arrPosition].data?.sprites.front_default,
           pokemons[arrPosition].data?.id,
           pokemons[arrPosition].data?.types[0].type.name,
@@ -147,7 +153,9 @@ function App (): JSX.Element {
           pokemons[arrPosition].data?.stats[3].base_stat,
           pokemons[arrPosition].data?.stats[2].base_stat,
           pokemons[arrPosition].data?.stats[4].base_stat,
-          pokemons[arrPosition].data?.weight)}
+          pokemons[arrPosition].data?.stats[5].base_stat,
+          pokemons[arrPosition].data?.weight
+        )}
       </Modal>
     )
   }, [modal, pokemons, arrPosition])
@@ -160,11 +168,11 @@ function App (): JSX.Element {
       <>
         <Header />
         <S.WrapperList>
-          {renderPoke(pokemons, pokemons[arrPosition].name)}
+          {renderPoke(pokemons)}
           {renderModal()}
         </S.WrapperList>
         <SearchBar isOpen={isSearch} onCloseSearch={() => setIsSearch(false)} />
-        <NavBar onFilter={() => handleFilter(true, true)} onOpenSearch={() => setIsSearch(true)} />
+        <NavBar onFilter={() => handleFilter(true, true)} onOpenSearch={() => setIsSearch(true)} onFavorites={() => handleFavorites()} showFavorites={isFavorite}/>
       </>
     </div>
   )

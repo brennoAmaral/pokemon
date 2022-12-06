@@ -16,6 +16,7 @@ export interface Pokemon {
       name: string
     }
   }]
+  weigth: number
   sprites: {
     front_default: string
   }
@@ -110,7 +111,6 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   useEffect(() => {
     getPokemons().then((result) => {
       setPokemons(result)
-      console.log('context ', result)
     }).catch((error) => {
       console.log(error)
     })

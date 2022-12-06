@@ -24,4 +24,6 @@ export const Modal = styled.div<ModalProps>`
   flex-direction: column;
   align-items: center;
   background-color: ${({ theme }) => theme.white};
+  z-index: 10;
+  padding-bottom: 40px;
 `
