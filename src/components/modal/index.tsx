@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import * as S from './styled'
 
 interface ModalProps {
@@ -14,7 +14,6 @@ const Modal: FC<ModalProps> = (props) => {
     isOpen,
     onClose
   } = props
-  useEffect(() => console.log(isOpen))
   return (
     <S.Shadow isOpen={isOpen} onClick={() => onClose()}>
       <S.Modal isOpen={isOpen}>

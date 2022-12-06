@@ -1,5 +1,5 @@
 import Card from './components/card'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext,  useState } from 'react'
 import Header from './components/header'
 import NavBar from './components/navBar'
 import * as S from './style'
@@ -8,7 +8,6 @@ import { PokemonSetupContext } from './context/PokemonSetupProvider'
 import SearchBar from './components/searchBar'
 import Text from './components/text'
 import Button from './components/button'
-import Star from './assets/svg/star'
 import theme from './styles/theme'
 import ElementType from './assets/svg/elementType'
 import getPokemonsByElement from './services/filter'
@@ -43,14 +42,6 @@ function App (): JSX.Element {
               <ElementType elementType='fire' background={theme.red} />
               <Text fontSize='25px'>
                 fire
-              </Text>
-            </>
-          </Button>
-          <Button onClick={() => handleFilter(8)} width='auto' height='auto'>
-            <>
-              <ElementType background='#808080' />
-              <Text fontSize='25px'>
-                flying
               </Text>
             </>
           </Button>
@@ -110,14 +101,16 @@ function App (): JSX.Element {
     setFiltering(filtering)
   }
   const handleFavorites = (): void => {
-    setIsFilter(true)
-    setIsSearch(false)
-    if (isFavorite) {
-      setPokemons(JSON.parse(localStorage.getItem('favorites')))
-      setIsFavorite(false)
-    } else {
-      resetPokemons()
-      setIsFavorite(true)
+    if (JSON.parse(localStorage.getItem('favorites')) !== null) {
+      setIsFilter(true)
+      setIsSearch(false)
+      if (isFavorite) {
+        setPokemons(JSON.parse(localStorage.getItem('favorites')))
+        setIsFavorite(false)
+      } else {
+        resetPokemons()
+        setIsFavorite(true)
+      }
     }
   }
 
@@ -140,12 +133,13 @@ function App (): JSX.Element {
           key={pokemon.data?.name}
         />
       )
-    })
+    }
+    )
   }, [pokemons])
 
   const renderModal = useCallback(() => {
     return (
-      <>{pokemons[arrPosition] && <Modal
+      <Modal
         isOpen={modal}
         onClose={() => setModal(false)}
         name={pokemons[arrPosition].data?.name}
@@ -164,8 +158,7 @@ function App (): JSX.Element {
           pokemons[arrPosition].data?.stats[5].base_stat,
           pokemons[arrPosition].data?.weight
         )}
-      </Modal>}
-      </>
+      </Modal>
     )
   }, [modal, pokemons, arrPosition])
 

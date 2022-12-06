@@ -104,7 +104,6 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
   )
   const handleSearch = (name: string) => {
     getPokemon(name).then((result) => {
-      console.log('pokemo', result)
       setPokemons(result)
     }).catch((error) => {
       console.log(error)

@@ -68,7 +68,7 @@ const getPokemonsByElement = async (pokemonType: number): Promise<Pokemon[]> => 
         return await axios.get(pokemons[key].pokemon.url)
       }))
     }).then((results) => {
-      return results.map((result, index) => {
+      return results.map((result) => {
         return result
       }) as unknown as Pokemon[]
     }).catch((error) => {

@@ -69,9 +69,7 @@ const getPokemon = async (name: string): Promise<Pokemon[]> => {
       let errors = error.response.status
       if (errors === 404) {
         alert('non-existent information')
-        return []
       }
-      console.log('erroooooo', error.response.status)
     })
 }
 export default getPokemon

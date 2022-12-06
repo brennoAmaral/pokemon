@@ -51,13 +51,11 @@ const Card: FC<CardProps> = (props) => {
     }
   }
   const handleFavorite = useCallback((): void => {
-    console.log('handlefavorite')
     setFav(true)
     setFavorite(name, sprite, id, type, hp, attack, especialAttack, defense, especialDefense, speed, weight)
   }, [])
 
   const handleDisfavor = useCallback((): void => {
-    console.log('handleDisfavor')
     setFav(false)
     setDisfavor(id)
   }, [])

@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useRef } from 'react'
+import { FC, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Lupe from '../../assets/svg/lupe'
 import theme from '../../styles/theme'
 import * as S from './styled'
@@ -13,7 +13,9 @@ interface SearchBarProps {
 const SearchBar: FC<SearchBarProps> = (props) => {
   const { isOpen, onCloseSearch, setIsFilter, setIsFavorite } = props
   const { handleSearch } = useContext(PokemonSetupContext)
+  const [inputValue, setInputValue] = useState<boolean>(true)
   const inputRef = useRef<string>('')
+  let buttonIsEnable: boolean = true
   const search = useCallback(() => {
     setIsFilter()
     setIsFavorite()
@@ -22,11 +24,18 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     onCloseSearch()
     inputRef.current.value = ''
   }, [])
-
+  const handleChange = (e: any): void => {
+    console.log(e.target.value)
+    if (e.target.value.length < 3) {
+      setInputValue(false)
+    } else {
+      setInputValue(true)
+    } 
+  }
   return (
     <S.Wrapper isOpen={isOpen}>
-      <S.SearchBar placeholder='type a pokemon name...' ref={inputRef} />
-      <Button onClick={() => search()} width='auto' height='auto'>
+      <S.SearchBar placeholder='type a pokemon name...' ref={inputRef} onChange={handleChange} />
+      <Button onClick={() => search()} width='auto' height='auto' buttonIsEnable={inputValue}>
         <Lupe size='25px' fill={theme.white} stroke={theme.darkBlue} />
       </Button>
     </S.Wrapper>

@@ -11,7 +11,11 @@ export const theme = {
   rock: '#793A00',
   bug: '#355C02',
   dark: '#000000',
-
+  ghost: '#5400BF',
+  dragon: '#C82400',
+  water: '#00936F',
+  grass: '#00936f',
+  flying: '#808080'
 }
 
 export type themeType = typeof theme
