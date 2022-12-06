@@ -38,9 +38,9 @@ const Card: FC<CardProps> = (props) => {
   } = props
 
   const [fav, setFav] = useState<boolean>(false)
+
   const isFavorite = (): void => {
     let favorite = JSON.parse(localStorage.getItem('favorites'))
-
     if (favorite !== null) {
       let itsHere = favorite.find(x => x.data.id === id)
       if (itsHere !== undefined) {

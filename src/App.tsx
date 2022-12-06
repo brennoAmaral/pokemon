@@ -11,20 +11,34 @@ import Button from './components/button'
 import Star from './assets/svg/star'
 import theme from './styles/theme'
 import ElementType from './assets/svg/elementType'
-import getPokemons from './services/getPokemons'
+import getPokemonsByElement from './services/filter'
 
 function App (): JSX.Element {
-  const { pokemons, setPokemons } = useContext(PokemonSetupContext)
+  const { pokemons, setPokemons, resetPokemons } = useContext(PokemonSetupContext)
   const [modal, setModal] = useState<boolean>(false)
   const [arrPosition, setArrPosition] = useState<number>(0)
-  const [isFilter, setIsFilter] = useState<boolean>(false)
+  const [filtering, setFiltering] = useState<boolean>(false)
   const [isSearch, setIsSearch] = useState<boolean>(false)
   const [isFavorite, setIsFavorite] = useState<boolean>(true)
-  const modalConstructure = useCallback((isFilter: boolean, name: string, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, speed: number, weight: number): JSX.Element => {
-    if (isFilter) {
+  const [isFilter, setIsFilter] = useState<boolean>(true)
+
+  const handleFilter = (typeNumber: number) => {
+    getPokemonsByElement(typeNumber).then((result) => {
+      setPokemons(result)
+    }).catch((error) => {
+      console.log(error)
+    })
+    setIsFilter(false)
+    setIsFavorite(true)
+    setIsSearch(false)
+  }
+
+  const modalConstructure = useCallback((filtering: boolean, name: string, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, speed: number, weight: number): JSX.Element => {
+    if (filtering) {
+      //filter types structure
       return (
         <S.WrapperElements>
-          <Button onClick={() => console.log('filter')} width='auto' height='auto'>
+          <Button onClick={() => handleFilter(10)} width='auto' height='auto'>
             <>
               <ElementType elementType='fire' background={theme.red} />
               <Text fontSize='25px'>
@@ -32,7 +46,7 @@ function App (): JSX.Element {
               </Text>
             </>
           </Button>
-          <Button onClick={() => console.log('filter')} width='auto' height='auto'>
+          <Button onClick={() => handleFilter(8)} width='auto' height='auto'>
             <>
               <ElementType background='#808080' />
               <Text fontSize='25px'>
@@ -43,17 +57,13 @@ function App (): JSX.Element {
         </S.WrapperElements>
       )
     } else {
+      //pokemons all info structure
       return (
         <>
           <S.HeaderModal>
             <Text fontSize='40px' bold margin='2px 0 0 0'>
               {name}
             </Text>
-            <S.WrapperStar>
-              <Button onClick={() => console.log(`${name} favoritado com sucesso`)} height='auto'>
-                <Star fill={theme.yellow} size={35} />
-              </Button>
-            </S.WrapperStar>
           </S.HeaderModal>
           <img src={sprite} height={'200px'} width={'200px'} />
           <S.WrapperText>
@@ -93,22 +103,20 @@ function App (): JSX.Element {
   const handlerModal = (valueModal: boolean, position: number): void => {
     setModal(valueModal)
     setArrPosition(position)
-    setIsFilter(false)
+    setFiltering(false)
   }
-  const handleFilter = (valueModal: boolean, isFilter: boolean): void => {
+  const openFilterOptions = (valueModal: boolean, filtering: boolean): void => {
     setModal(valueModal)
-    setIsFilter(isFilter)
+    setFiltering(filtering)
   }
   const handleFavorites = (): void => {
+    setIsFilter(true)
+    setIsSearch(false)
     if (isFavorite) {
       setPokemons(JSON.parse(localStorage.getItem('favorites')))
       setIsFavorite(false)
     } else {
-      getPokemons().then((result) => {
-        setPokemons(result)
-      }).catch((error) => {
-        console.log(error)
-      })
+      resetPokemons()
       setIsFavorite(true)
     }
   }
@@ -137,13 +145,13 @@ function App (): JSX.Element {
 
   const renderModal = useCallback(() => {
     return (
-      <Modal
+      <>{pokemons[arrPosition] && <Modal
         isOpen={modal}
         onClose={() => setModal(false)}
         name={pokemons[arrPosition].data?.name}
       >
         {modalConstructure(
-          isFilter,
+          filtering,
           pokemons[arrPosition].data?.name,
           pokemons[arrPosition].data?.sprites.front_default,
           pokemons[arrPosition].data?.id,
@@ -156,13 +164,11 @@ function App (): JSX.Element {
           pokemons[arrPosition].data?.stats[5].base_stat,
           pokemons[arrPosition].data?.weight
         )}
-      </Modal>
+      </Modal>}
+      </>
     )
   }, [modal, pokemons, arrPosition])
 
-  useEffect(() => {
-    console.log(pokemons)
-  })
   return (
     <div className="App">
       <>
@@ -171,8 +177,8 @@ function App (): JSX.Element {
           {renderPoke(pokemons)}
           {renderModal()}
         </S.WrapperList>
-        <SearchBar isOpen={isSearch} onCloseSearch={() => setIsSearch(false)} />
-        <NavBar onFilter={() => handleFilter(true, true)} onOpenSearch={() => setIsSearch(true)} onFavorites={() => handleFavorites()} showFavorites={isFavorite}/>
+        <SearchBar isOpen={isSearch} onCloseSearch={() => setIsSearch(false)} setIsFilter={() => setIsFilter(true)} setIsFavorite={() => setIsFavorite(true)}/>
+        <NavBar openFilter={() => openFilterOptions(true, true)} openSearch={() => setIsSearch(true)} openFavorites={() => handleFavorites()} showFavorites={isFavorite} isFilter={isFilter} isSearch={isSearch} setIsFavorite={() => setIsFavorite(true)} setIsSearch={() => setIsSearch(false)}/>
       </>
     </div>
   )

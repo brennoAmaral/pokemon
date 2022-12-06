@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useContext } from 'react'
 import * as S from './styled'
 import Filter from '../../assets/svg/filter'
 import Lupe from '../../assets/svg/lupe'
@@ -6,22 +6,57 @@ import Star from '../../assets/svg/star'
 import theme from '../../styles/theme'
 import Text from '../text'
 import Button from '../button'
-import { flushSync } from 'react-dom'
+import { PokemonSetupContext } from '../../context/PokemonSetupProvider'
 
 interface NavBarProps {
-  onFilter: () => void
-  onOpenSearch: () => void
-  onFavorites: () => void
+  openFilter: () => void
+  openSearch: () => void
+  openFavorites: () => void
+  setIsFavorite: () => void
+  setIsSearch: () => void
   showFavorites: boolean
+  isFilter: boolean
+  isSearch: boolean
 }
 
 const NavBar: FC<NavBarProps> = (props) => {
-  const { onFilter, onOpenSearch, onFavorites, showFavorites } = props
-  console.log(showFavorites)
-  const buttonRender = useCallback(() => {
+  const { openFilter, openSearch, openFavorites, showFavorites, isFilter, isSearch, setIsFavorite, setIsSearch} = props
+  const { resetPokemons } = useContext(PokemonSetupContext)
+
+  const buttonFilterRender = useCallback(() => {
+    if (isFilter) {
+      return (
+        <Button height='none' onClick={openFilter}>
+          <S.WrapperChildrenButton>
+            <Filter fill={theme.white} stroke={theme.darkBlue}/>
+            <Text color={theme.white} fontSize='15px'>
+              Filter
+            </Text>
+          </S.WrapperChildrenButton>
+        </Button>
+      )
+    } else {
+      return (
+        <Button height='none' onClick={() => resetPokemons()}>
+          <S.WrapperChildrenButton>
+            <Filter fill={theme.white} stroke={theme.white}/>
+            <Text color={theme.white} fontSize='15px'>
+              Filter
+            </Text>
+          </S.WrapperChildrenButton>
+        </Button>
+      )
+    }
+  }, [isFilter])
+
+  const handleFavorite = (): void => {
+    setIsFavorite()
+    resetPokemons()
+  }
+  const buttonFavoriteRender = useCallback(() => {
     if (showFavorites) {
       return (
-      <Button height='none' onClick={() => onFavorites()}>
+      <Button height='none' onClick={() => openFavorites()}>
         <S.WrapperChildrenButton>
           <Star size={31} stroke={theme.white} fill={theme.darkBlue} />
           <Text color={theme.white} fontSize='15px'>
@@ -32,7 +67,7 @@ const NavBar: FC<NavBarProps> = (props) => {
       )
     } else {
       return (
-      <Button height='none' onClick={() => onFavorites()}>
+      <Button height='none' onClick={() => handleFavorite()}>
         <S.WrapperChildrenButton>
           <Star size={31} stroke={theme.white} fill={theme.white} />
           <Text color={theme.white} fontSize='15px'>
@@ -44,26 +79,38 @@ const NavBar: FC<NavBarProps> = (props) => {
     }
   }, [showFavorites])
 
+  const buttonSearchRender = useCallback(() => {
+    if (!isSearch) {
+      return (
+        <Button height='none' onClick={openSearch}>
+        <S.WrapperChildrenButton>
+          <Lupe stroke={theme.white} />
+          <Text color={theme.white} fontSize='15px'>
+            Search
+          </Text>
+        </S.WrapperChildrenButton>
+      </Button>
+      )
+    } else {
+      return (
+        <Button height='none' onClick={() => setIsSearch()}>
+        <S.WrapperChildrenButton>
+          <Lupe stroke={theme.white} />
+          <Text color={theme.white} fontSize='15px'>
+            Search
+          </Text>
+        </S.WrapperChildrenButton>
+      </Button>
+      )
+    }
+  }, [isSearch])
+
   return (
     <S.NavBar>
       <S.WrapperButton>
-        <Button height='none' onClick={onFilter}>
-          <S.WrapperChildrenButton>
-            <Filter />
-            <Text color={theme.white} fontSize='15px'>
-              Filter
-            </Text>
-          </S.WrapperChildrenButton>
-        </Button>
-        {buttonRender()}
-        <Button height='none' onClick={onOpenSearch}>
-          <S.WrapperChildrenButton>
-            <Lupe />
-            <Text color={theme.white} fontSize='15px'>
-              Search
-            </Text>
-          </S.WrapperChildrenButton>
-        </Button>
+        {buttonFilterRender()}
+        {buttonFavoriteRender()}
+        {buttonSearchRender()}
       </S.WrapperButton>
     </S.NavBar>
   )

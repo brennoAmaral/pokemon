@@ -1,4 +1,4 @@
-import { ReactNode, useState, createContext, useEffect, useRef } from 'react'
+import { ReactNode, useState, createContext, useEffect } from 'react'
 import type { FC } from 'react'
 import getPokemons from '../services/getPokemons'
 import getPokemon from '../services/getPokemon'
@@ -67,6 +67,7 @@ export interface Pokemon {
 interface PokemonSetupDataStructure {
   pokemons: Result<Pokemon>
   setPokemons: (arr: Result<Pokemon>) => void
+  resetPokemons: () => void
   handleSearch: (name: string) => void
 }
 
@@ -90,6 +91,7 @@ const initialPokemonSetup = {
     }
   ],
   setPokemons: () => undefined,
+  resetPokemons: () => undefined,
   handleSearch: () => undefined
 }
 
@@ -108,16 +110,19 @@ const PokemonSetup: FC<PokemonSetupProps> = (props) => {
       console.log(error)
     })
   }
-  useEffect(() => {
+  const resetPokemons = (): void => {
     getPokemons().then((result) => {
       setPokemons(result)
     }).catch((error) => {
       console.log(error)
     })
+  }
+  useEffect(() => {
+    resetPokemons()
   }, [])
 
   return (
-    <PokemonSetupContext.Provider value={{ pokemons, setPokemons, handleSearch}}>
+    <PokemonSetupContext.Provider value={{ pokemons, setPokemons, handleSearch, resetPokemons }}>
       {children}
     </PokemonSetupContext.Provider>
   )

@@ -28,7 +28,7 @@ export const Wrapper = styled.div<WrapperProps>`
   justify-content: space-between;
   align-items: center;
   filter: drop-shadow(5px 5px 10px #000);
-  transition: 1s;
+  transition: 0.5s;
   position: fixed;
   bottom: ${({ isOpen }) => isOpen ? '100px' : '0px'}
 `

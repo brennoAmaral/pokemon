@@ -7,12 +7,16 @@ import { PokemonSetupContext } from '../../context/PokemonSetupProvider'
 interface SearchBarProps {
   isOpen: boolean
   onCloseSearch: () => void
+  setIsFilter: () => void
+  setIsFavorite: () => void
 }
 const SearchBar: FC<SearchBarProps> = (props) => {
-  const { isOpen, onCloseSearch } = props
+  const { isOpen, onCloseSearch, setIsFilter, setIsFavorite } = props
   const { handleSearch } = useContext(PokemonSetupContext)
   const inputRef = useRef<string>('')
   const search = useCallback(() => {
+    setIsFilter()
+    setIsFavorite()
     handleSearch(inputRef.current.value)
     console.log(inputRef.current.value)
     onCloseSearch()
@@ -23,7 +27,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     <S.Wrapper isOpen={isOpen}>
       <S.SearchBar placeholder='type a pokemon name...' ref={inputRef} />
       <Button onClick={() => search()} width='auto' height='auto'>
-        <Lupe size='25px' fill={theme.darkBlue} stroke={theme.darkBlue} />
+        <Lupe size='25px' fill={theme.white} stroke={theme.darkBlue} />
       </Button>
     </S.Wrapper>
   )
