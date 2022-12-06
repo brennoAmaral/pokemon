@@ -125,11 +125,9 @@ export const setFavorite = (
     newStorage.push(arrayPokemon)
     localStorage.setItem('favorites', JSON.stringify(newStorage))
   } else if (pokeStorage === null) {
-    console.log('entrou aqui')
     const arrayPokemon: [Pokemon] = [pokemon]
     localStorage.setItem('favorites', JSON.stringify(arrayPokemon))
   }
-  console.log(JSON.parse(localStorage.getItem('favorites')))
 }
 
 export const setDisfavor = (pokemonId: number): void => {
@@ -139,5 +137,4 @@ export const setDisfavor = (pokemonId: number): void => {
   if (newStorage.length !== 0) {
     localStorage.setItem('favorites', JSON.stringify(newStorage))
   }
-  console.log('new', newStorage)
 }

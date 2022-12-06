@@ -6,6 +6,7 @@ export const WrapperList = styled.div`
     padding-bottom: 80px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 `
 export const HeaderModal = styled.div`
     position: relative;

@@ -9,6 +9,7 @@ interface ButtonProps {
   background?: string
   rounded?: boolean
   margin?: string
+  buttonIsEnable?: boolean
   onClick: () => void
 }
 const Button: FC<ButtonProps> = (props) => {
@@ -20,6 +21,7 @@ const Button: FC<ButtonProps> = (props) => {
     background = '#00000000',
     rounded = false,
     margin = 'none',
+    buttonIsEnable = false,
     onClick
   } = props
 
@@ -31,6 +33,7 @@ const Button: FC<ButtonProps> = (props) => {
         background={background}
         rounded={rounded}
         margin={margin}
+        disabled={buttonIsEnable}
         onClick={onClick}
     >
         {children}
