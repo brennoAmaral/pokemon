@@ -19,7 +19,7 @@ function App (): JSX.Element {
   const [arrPosition, setArrPosition] = useState<number>(0)
   const [isFilter, setIsFilter] = useState<boolean>(false)
   const [isSearch, setIsSearch] = useState<boolean>(false)
-  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+  const [isFavorite, setIsFavorite] = useState<boolean>(true)
   const modalConstructure = useCallback((isFilter: boolean, name: string, sprite: string, id: number, type: string, hp: number, attack: number, especialAttack: number, defense: number, especialDefense: number, speed: number, weight: number): JSX.Element => {
     if (isFilter) {
       return (

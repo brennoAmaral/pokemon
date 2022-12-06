@@ -34,7 +34,7 @@ const NavBar: FC<NavBarProps> = (props) => {
       return (
       <Button height='none' onClick={() => onFavorites()}>
         <S.WrapperChildrenButton>
-          <Star size={31} stroke={theme.white} fill={theme.yellow} />
+          <Star size={31} stroke={theme.white} fill={theme.white} />
           <Text color={theme.white} fontSize='15px'>
             Favorites
           </Text>
