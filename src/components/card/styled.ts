@@ -22,7 +22,9 @@ export const WrapperInfo = styled.div`
     justify-content: center;
     align-items: center;
 `
-
+export const WrapperCard = styled.div`
+    position: relative;
+`
 export const HeaderCard = styled.div`
     position: relative;
     margin-top: 10px;
@@ -33,8 +35,9 @@ export const HeaderCard = styled.div`
 
 export const WrapperStar = styled.div`
     position: absolute;
-    top: 0px;
-    right: 3px;
+    bottom: 38px;
+    right: 10px;
+    z-index: 1;
 `
 
 export const WrapperText = styled.div`

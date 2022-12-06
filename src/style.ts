@@ -26,7 +26,6 @@ export const WrapperText = styled.div`
 export const WrapperElements = styled.div`
     width:96%;
     margin: 40px auto 0px auto;
-    padding-bottom: 40px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

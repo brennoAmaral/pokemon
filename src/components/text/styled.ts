@@ -12,4 +12,6 @@ export const Text = styled.p<TextProps>`
     font-weight: ${({ bold }) => bold ? '700' : 'normal'};
     color: ${({ color }) => color};
     margin: ${({ margin }) => margin};
+    font-family: monospace;
+    word-spacing: -5px;
 `
