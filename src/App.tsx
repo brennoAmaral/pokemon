@@ -145,15 +145,6 @@ function App(): JSX.Element {
     )
   }, [modal, pokemons, arrPosition])
 
-  const renderButtonFilter = useCallback((codeType: number) => {
-    return (
-      <S.WrapperElements>
-        <Button onClick={() => handleFilter(codeType)} width='auto' height='auto'>
-          <ElementType codeType={codeType} background={theme.red} />
-        </Button>
-      </S.WrapperElements>
-    )
-  }, [])
   const renderModalFilter = useCallback(() => {
     return (
       <Modal
