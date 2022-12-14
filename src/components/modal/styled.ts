@@ -15,7 +15,8 @@ export const Shadow = styled.div<ModalProps>`
 `
 export const Modal = styled.div<ModalProps>`
   width: 100%;
-  height: auto;
+  height: 80%;
+  overflow-x: scroll;
   position: absolute;
   bottom: 0;
   border-top-left-radius: 10px;
@@ -25,5 +26,4 @@ export const Modal = styled.div<ModalProps>`
   align-items: center;
   background-color: ${({ theme }) => theme.white};
   z-index: 10;
-  padding-bottom: 40px;
 `

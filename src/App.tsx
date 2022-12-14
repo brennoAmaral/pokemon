@@ -12,7 +12,7 @@ import theme from './styles/theme'
 import ElementType from './assets/svg/elementType'
 import getPokemonsByElement from './services/filter'
 
-function App (): JSX.Element {
+function App(): JSX.Element {
   const { pokemons, setPokemons, resetPokemons } = useContext(PokemonSetupContext)
   const [modal, setModal] = useState<boolean>(false)
   const [arrPosition, setArrPosition] = useState<number>(0)
@@ -145,6 +145,15 @@ function App (): JSX.Element {
     )
   }, [modal, pokemons, arrPosition])
 
+  const renderButtonFilter = useCallback((codeType: number) => {
+    return (
+      <S.WrapperElements>
+        <Button onClick={() => handleFilter(codeType)} width='auto' height='auto'>
+          <ElementType codeType={codeType} background={theme.red} />
+        </Button>
+      </S.WrapperElements>
+    )
+  }, [])
   const renderModalFilter = useCallback(() => {
     return (
       <Modal
@@ -152,18 +161,17 @@ function App (): JSX.Element {
         onClose={() => setModalFilter(false)}
         name={pokemons[arrPosition]?.name}
       >
-
         <S.WrapperElements>
-          <Button onClick={() => handleFilter(10)} width='auto' height='auto'>
-            <>
-              <ElementType elementType='fire' background={theme.red} />
-              <Text fontSize='25px'>
-                fire
-              </Text>
-            </>
-          </Button>
+        {
+          [...Array(18)].map((index, key) => {
+            return (
+              <Button onClick={() => handleFilter(key + 1)} width='auto' height='auto' key={key} margin={key >= 16 ? '0 0 50px 0' : ''}>
+                <ElementType codeType={key + 1} />
+              </Button>
+            )
+          })
+        }
         </S.WrapperElements>
-
       </Modal>
     )
   }, [modalFilter, pokemons, arrPosition])

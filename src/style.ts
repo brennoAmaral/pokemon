@@ -26,8 +26,9 @@ export const WrapperText = styled.div`
 `
 export const WrapperElements = styled.div`
     width:96%;
-    margin: 40px auto 0px auto;
+    margin: 0 auto 0px auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    overflow-x: scroll;
 `
